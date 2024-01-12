@@ -1,5 +1,5 @@
 import traceback
-from app.models import Balance, Expense
+from app.models import Balance, User
 from app.serializers.balance_serializer import BalanceSerializer
 from utility.response import ApiResponse
 from utility.utils import MultipleFieldPKModelMixin, CreateRetrieveUpdateViewSet, get_pagination_resp, get_serielizer_error, calculate_splits, update_balances
@@ -38,8 +38,19 @@ class BalanceView(MultipleFieldPKModelMixin, CreateRetrieveUpdateViewSet, ApiRes
             # user1 => balances_owed
             # user2 => balances_owed_to
             balances = Balance.objects.filter(user1=request.user)
-            balances = balances.values("pk", "created_at",  "user2").annotate(amount=Sum("amount")).order_by("user2")
-            data = self.transform_list(balances)
+            balances = balances.values("pk", "created_at",  "user2", "user2_id").annotate(amount=Sum("amount")).order_by("user2")
+            is_simplify = request.query_params.get("simplify", None)
+            if is_simplify == "true":
+                msg = "{user1} owes {amount} to {user2}"
+                data = [
+                    msg.format(
+                        user1=request.user.name,
+                        amount=round(i["amount"], 2),
+                        user2=User.objects.get(pk=i["user2_id"]).name
+                    ) for i in balances
+                ]
+            else:
+                data = self.transform_list(balances)
             return ApiResponse.response_ok(self, data=data)
 
         except Exception as e:
