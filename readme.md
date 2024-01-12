@@ -1,7 +1,7 @@
 # Expense Task - Teachmint
 
 
-# Steps for running this application. 
+### Steps for running this application. 
 1. pip install -r requirements.txt
 
 2. create .env file (add var; DEBUG, SECRET_KEY, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
