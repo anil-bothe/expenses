@@ -69,6 +69,9 @@ ________________________________________________
 2. get balance with user [http://127.0.0.1:8000/api/v1/balance/] # (authenticated user balance get shown)
 3. get balance with SIMPLIFY [http://127.0.0.1:8000/api/v1/balance/?simplify=true]
 
+4. Swagger: [http://127.0.0.1:8000/swagger/]
+4. API Documentation: [http://127.0.0.1:8000/redoc/]
+
 
 <!-- # Features/Requirements:
 1. User: Each user should have a userId, name, email, mobile number.
