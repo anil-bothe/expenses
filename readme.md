@@ -63,7 +63,7 @@ ________________________________________________
     }   
     </code>
 
-###### API:
+### API:
 1. create expense[POST request]: [http://127.0.0.1:8000/api/v1/expense/list/]
 1. get single expense: [http://127.0.0.1:8000/api/v1/expense/:id/]
 2. get balance with user [http://127.0.0.1:8000/api/v1/balance/] # (authenticated user balance get shown)
