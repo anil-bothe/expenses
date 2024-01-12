@@ -115,8 +115,8 @@ class ExpenseView(MultipleFieldPKModelMixin, CreateRetrieveUpdateViewSet, ApiRes
             update_balances(expense, splits)  # Update balances
 
             # email scheduler
-            # scheduler = EmailScheduler(expense)
-            # scheduler.start()
+            scheduler = EmailScheduler(expense)
+            scheduler.start()
 
             response_data = self.transform_single(expense)
             return ApiResponse.response_created(self, data=response_data, message=self.singular_name + " created successfully.")
